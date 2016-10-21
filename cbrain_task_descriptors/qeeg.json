@@ -5,7 +5,7 @@
 	"command-line": "qeegt [input_directory]/[basename] [state] [lwin] [fmin] [freqres] [fmax] [wbands] [brain] [pg_apply] [flags]",
 	"docker-image": "mcin/qeeg:latest",
 	"docker-index": "http://index.docker.io",
-	"schema-version": "0.3",
+	"schema-version": "0.2",
 	"inputs": [{
 		"id": "input_directory",
 		"name": "Input directory",
