@@ -1,0 +1,98 @@
+{
+	"name": "qeeg",
+	"tool-version": "undefined",
+	"description": "qeeg application",
+	"command-line": "qeegt [input_directory]/[basename] [state] [lwin] [fmin] [freqres] [fmax] [wbands] [brain] [pg_apply] [flags]",
+	"docker-image": "mcin/qeeg:latest",
+	"docker-index": "http://index.docker.io",
+	"schema-version": "0.3",
+	"inputs": [{
+		"id": "input_directory",
+		"name": "Input directory",
+		"type": "File",
+		"description": "Directory containing the files to process",
+		"command-line-key": "[input_directory]",
+		"list": false,
+		"optional": false
+	}, {
+		"id": "basename",
+		"name": "Basename",
+		"type": "String",
+		"description": "Basename of the file to process in the input directory",
+		"command-line-key": "[basename]",
+		"list": false,
+		"optional": false
+	}, {
+		"id": "state",
+		"name": "State",
+		"type": "String",
+		"description": "Example: \"A\"",
+		"command-line-key": "[state]",
+		"list": false,
+		"optional": false
+	}, {
+		"id": "lwin",
+		"name": "Window length",
+		"type": "Number",
+		"description": "Length of the analysis window in seconds",
+		"command-line-key": "[lwin]",
+		"minimum": 0,
+		"list": false,
+		"optional": false
+	}, {
+		"id": "fmin",
+		"name": "fmin",
+		"type": "Number",
+		"description": "Example: \"0.390625\"",
+		"command-line-key": "[fmin]",
+		"list": false,
+		"optional": false
+	}, {
+		"id": "freqres",
+		"name": "freqres",
+		"type": "Number",
+		"description": "Example: \"0.390625\"",
+		"command-line-key": "[freqres]",
+		"list": false,
+		"optional": false
+	}, {
+		"id": "fmax",
+		"name": "fmax",
+		"type": "Number",
+		"description": "Example: \"19.11\"",
+		"command-line-key": "[fmax]",
+		"list": false,
+		"optional": false
+	}, {
+		"id": "wbands",
+		"name": "wbands",
+		"type": "String",
+		"description": "A string representing a 5x2 matrix of real numbers, where rows are separated by ';' and columns by spaces. Example: \"1.56 3.51; 3.9 7.41; 7.8 12.48; 12.87 19.11; 1.56 30\"",
+		"command-line-key": "[wbands]",
+		"list": false,
+		"optional": false
+	}, {
+		"id": "flags",
+		"name": "flags",
+		"type": "String",
+		"description": "A string representing 12 boolean values. Example: \"1 1 1 0 1 1 1 1 1 1 1 1\". flags(1) - 1 for calculating the Broad Band Spectral Model. flags(2) - 1 for calculating the Narrow Band Spectral Model. flags(3) - 1 for calculating the Spectra at the EEG sources. flags(4) - RESERVED, not used. flags(5) - 1 or calculating the Broad Band Spectral Model Z values. flags(6) - 1 for calculating the Narrow Band Spectral Model Z values. flags(7) - 1 for calculating the Sources Spectra Z values. flags(8) - 1 for calculating the correlations matrix bewteen all pairs of channels for each epoch. flags(9) - 1 for calculating the coherence matrix bewteen all pairs of channels for each frequency. flags(10) - 1 for calculating the phase difference matrix bewteen all pairs of channels for each frequency. flags(11) - 1 for calculating the frequency domain correlations bewteen all pairs of channels for each frequency and each epoch.flags(12) - Store the XYZ components of the solutions at the sources ",
+		"command-line-key": "[flags]",
+		"list": false,
+		"optional": false
+	}, {
+		"id": "brain",
+		"name": "brain",
+		"type": "Number",
+		"command-line-key": "[brain]",
+		"list": false,
+		"optional": false
+	}, {
+		"id": "pg_apply",
+		"name": "pg_apply",
+		"type": "Number",
+		"command-line-key": "[pg_apply]",
+		"list": false,
+		"optional": false
+	}],
+	"output-files": []
+}
