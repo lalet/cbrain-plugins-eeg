@@ -5,7 +5,7 @@
 	"command-line": "qeegt [input_directory]/[basename] [state] [lwin] [fmin] [freqres] [fmax] [wbands] [brain] [pg_apply] [flags]",
 	"docker-image": "mcin/qeeg:latest",
 	"docker-index": "http://index.docker.io",
-	"schema-version": "0.3",
+	"schema-version": "0.2",
 	"inputs": [{
 		"id": "input_directory",
 		"name": "Input directory",
@@ -26,7 +26,8 @@
 		"id": "state",
 		"name": "State",
 		"type": "String",
-		"description": "Example: \"A\"",
+		"description": "Example: \"A\". EEG state to be analyzed. The program will look for existing analysis windows labelled as state 'A' (Eyes Closed)",
+                "default-value": "A",
 		"command-line-key": "[state]",
 		"list": false,
 		"optional": false
@@ -34,6 +35,7 @@
 		"id": "lwin",
 		"name": "Window length",
 		"type": "Number",
+                "default-value": 2.56,
 		"description": "Length of the analysis window in seconds",
 		"command-line-key": "[lwin]",
 		"minimum": 0,
@@ -42,16 +44,19 @@
 	}, {
 		"id": "fmin",
 		"name": "fmin",
+                "default-value": 0.390625,
 		"type": "Number",
-		"description": "Example: \"0.390625\"",
+		"description": "Low cut frequency for analysis. Example: \"0.390625\"",
 		"command-line-key": "[fmin]",
+                "minimum": 0,
 		"list": false,
 		"optional": false
 	}, {
 		"id": "freqres",
 		"name": "freqres",
 		"type": "Number",
-		"description": "Example: \"0.390625\"",
+                "default-value": 0.390625,
+		"description": "Fequency resolution for analysis. Example: \"0.390625\". The analysis will use a frequency band like this: fmin:freqres:fmax. The program will compare this interval with the interval that is obtained for the real frequency parameters of the signal and will match both of them",
 		"command-line-key": "[freqres]",
 		"list": false,
 		"optional": false
@@ -59,13 +64,15 @@
 		"id": "fmax",
 		"name": "fmax",
 		"type": "Number",
-		"description": "Example: \"19.11\"",
+                "default-value": 19.11,
+		"description": "High cut frequency for analysis. Example: \"19.11\"",
 		"command-line-key": "[fmax]",
 		"list": false,
 		"optional": false
 	}, {
 		"id": "wbands",
 		"name": "wbands",
+                "default-value": "1.56 3.51; 3.9 7.41; 7.8 12.48; 12.87 19.11; 1.56 30",
 		"type": "String",
 		"description": "A string representing a 5x2 matrix of real numbers, where rows are separated by ';' and columns by spaces. Example: \"1.56 3.51; 3.9 7.41; 7.8 12.48; 12.87 19.11; 1.56 30\"",
 		"command-line-key": "[wbands]",
@@ -75,6 +82,7 @@
 		"id": "flags",
 		"name": "flags",
 		"type": "String",
+                "default-value": "1 1 1 0 1 1 1 1 1 1 1 1",
 		"description": "A string representing 12 boolean values. Example: \"1 1 1 0 1 1 1 1 1 1 1 1\". flags(1) - 1 for calculating the Broad Band Spectral Model. flags(2) - 1 for calculating the Narrow Band Spectral Model. flags(3) - 1 for calculating the Spectra at the EEG sources. flags(4) - RESERVED, not used. flags(5) - 1 or calculating the Broad Band Spectral Model Z values. flags(6) - 1 for calculating the Narrow Band Spectral Model Z values. flags(7) - 1 for calculating the Sources Spectra Z values. flags(8) - 1 for calculating the correlations matrix bewteen all pairs of channels for each epoch. flags(9) - 1 for calculating the coherence matrix bewteen all pairs of channels for each frequency. flags(10) - 1 for calculating the phase difference matrix bewteen all pairs of channels for each frequency. flags(11) - 1 for calculating the frequency domain correlations bewteen all pairs of channels for each frequency and each epoch.flags(12) - Store the XYZ components of the solutions at the sources ",
 		"command-line-key": "[flags]",
 		"list": false,
@@ -82,6 +90,11 @@
 	}, {
 		"id": "brain",
 		"name": "brain",
+                "description": "1 indicates to restrict the inverse solution to only gray matter. Otherwise, deep structure (basal ganglia) will be included in the grid",
+                "default-value": 1,
+                "minimum": 0,
+                "maximum": 1,
+                "integer": true,
 		"type": "Number",
 		"command-line-key": "[brain]",
 		"list": false,
@@ -89,10 +102,24 @@
 	}, {
 		"id": "pg_apply",
 		"name": "pg_apply",
+                "default-value": 1,
 		"type": "Number",
+                "description": "1 for substracting the Global Scale Factor (Geometric Power) from the EEG signal",
+                "minimum": 0,
+                "maximum": 1,
+                "integer": true,
 		"command-line-key": "[pg_apply]",
 		"list": false,
 		"optional": false
 	}],
-	"output-files": []
+	"output-files": [
+	{
+        "id": "folder_out",
+        "name": "Output folder",
+        "description": "A folder containing the output files and a copy of the input files.",
+        "path-template": "[input_directory]",
+        "list": false,
+        "optional": false
+	}
+	]
 }
