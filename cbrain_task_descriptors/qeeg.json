@@ -3,15 +3,17 @@
     "tool-version": "undefined",
     "description": "qeeg application",
     "command-line": "qeegt.sh --input [input_directory]/[basename] --state [state] --lwin [lwin] --fmin [fmin] --freqres [freqres] --fmax [fmax] --wbands [wbands] [brain] [pg_apply] [bbsm] [nbsm] [spectra] [bbsmz] [nbsmz] [ssz] [corr] [cohe] [phdiff] [fcorr] [storexyz]",
-    "docker-image": "mcin/qeeg:latest",
-    "docker-index": "http://index.docker.io",
-    "schema-version": "0.2",
+    "container-image": {
+       "type": "docker",
+       "image": "mcin/qeeg:latest"	
+     },
+    "schema-version": "0.4",
     "inputs": [{
 	"id": "input_directory",
 	"name": "Input directory",
 	"type": "File",
 	"description": "Directory containing the files to process.",
-	"command-line-key": "[input_directory]",
+	"value-key": "[input_directory]",
 	"list": false,
 	"optional": false
     }, {
@@ -19,7 +21,7 @@
 	"name": "Basename",
 	"type": "String",
 	"description": "Basename of the file to process in the input directory.",
-	"command-line-key": "[basename]",
+	"value-key": "[basename]",
 	"list": false,
 	"optional": false
     }, {
@@ -28,7 +30,7 @@
 	"type": "String",
 	"description": "Example: \"A\". EEG state to be analyzed. The program will look for existing analysis windows labelled as state 'A' (Eyes Closed).",
         "default-value": "A",
-	"command-line-key": "[state]",
+	"value-key": "[state]",
 	"list": false,
 	"optional": false
     }, {
@@ -37,7 +39,7 @@
 	"type": "Number",
         "default-value": 2.56,
 	"description": "Length of the analysis window in seconds.",
-	"command-line-key": "[lwin]",
+	"value-key": "[lwin]",
 	"minimum": 0,
 	"list": false,
 	"optional": false
@@ -47,7 +49,7 @@
         "default-value": 0.390625,
 	"type": "Number",
 	"description": "Low cut frequency for analysis. Example: \"0.390625\".",
-	"command-line-key": "[fmin]",
+	"value-key": "[fmin]",
         "minimum": 0,
 	"list": false,
 	"optional": false
@@ -57,7 +59,7 @@
 	"type": "Number",
         "default-value": 0.390625,
 	"description": "Fequency resolution for analysis. Example: \"0.390625\". The analysis will use a frequency band like this: fmin:freqres:fmax. The program will compare this interval with the interval that is obtained for the real frequency parameters of the signal and will match both of them.",
-	"command-line-key": "[freqres]",
+	"value-key": "[freqres]",
 	"list": false,
 	"optional": false
     }, {
@@ -66,7 +68,7 @@
 	"type": "Number",
         "default-value": 19.11,
 	"description": "High cut frequency for analysis. Example: \"19.11\".",
-	"command-line-key": "[fmax]",
+	"value-key": "[fmax]",
 	"list": false,
 	"optional": false
     }, {
@@ -75,7 +77,7 @@
         "default-value": "1.56 3.51; 3.9 7.41; 7.8 12.48; 12.87 19.11; 1.56 30",
 	"type": "String",
 	"description": "Broad Bands definition. A string representing a 5x2 matrix of real numbers, where rows are separated by ';' and columns by spaces. Example: \"1.56 3.51; 3.9 7.41; 7.8 12.48; 12.87 19.11; 1.56 30\".",
-	"command-line-key": "[wbands]",
+	"value-key": "[wbands]",
 	"list": false,
 	"optional": false
     }, {
@@ -84,7 +86,7 @@
         "description": "Restricts the inverse solution to only gray matter. Otherwise, deep structure (basal ganglia) will be included in the grid.",
         "default-value": true,
 	"type": "Flag",
-	"command-line-key": "[brain]",
+	"value-key": "[brain]",
         "command-line-flag": "--brain",
         "optional": true
     }, {
@@ -93,7 +95,7 @@
         "default-value": true,
 	"type": "Flag",
         "description": "Substracts the Global Scale Factor (Geometric Power) from the EEG signal.",
-	"command-line-key": "[pg_apply]",
+	"value-key": "[pg_apply]",
         "command-line-flag": "--pg_apply",
         "optional": true
         
@@ -103,7 +105,7 @@
 	"type": "Flag",
         "default-value": true,
 	"description": "Calculates the Broad Band Spectral Model.",
-	"command-line-key": "[bbsm]",
+	"value-key": "[bbsm]",
         "command-line-flag": "--bbsm",
         "optional": true
     }, {
@@ -112,7 +114,7 @@
 	"type": "Flag",
         "default-value": true,
 	"description": "Calculates the Narrow Band Spectral Model.",
-	"command-line-key": "[nbsm]",
+	"value-key": "[nbsm]",
         "command-line-flag": "--nbsm",
         "optional": true
     },  {
@@ -121,7 +123,7 @@
 	"type": "Flag",
         "default-value": true,
 	"description": "Calculates the Spectra at the EEG sources.",
-	"command-line-key": "[spectra]",
+	"value-key": "[spectra]",
         "command-line-flag": "--spectra",
         "optional": true
     }, {
@@ -130,7 +132,7 @@
 	"type": "Flag",
         "default-value": true,
 	"description": "Calculates the Broad Band Spectral Model Z values.",
-	"command-line-key": "[bbsmz]",
+	"value-key": "[bbsmz]",
         "command-line-flag": "--bbsmz",
         "optional": true
     }, {
@@ -139,7 +141,7 @@
 	"type": "Flag",
         "default-value": true,
 	"description": "Calculates the Narrow Band Spectral Model Z values.",
-	"command-line-key": "[nbsmz]",
+	"value-key": "[nbsmz]",
         "command-line-flag": "--nbsmz",
         "optional": true
     }, {
@@ -148,7 +150,7 @@
 	"type": "Flag",
         "default-value": true,
 	"description": "Calculates the Sources Spectra Z values.",
-	"command-line-key": "[ssz]",
+	"value-key": "[ssz]",
         "command-line-flag": "--ssz",
         "optional": true
     }, {
@@ -157,7 +159,7 @@
 	"type": "Flag",
         "default-value": true,
 	"description": "Calculates the correlations matrix bewteen all pairs of channels for each epoch.",
-	"command-line-key": "[corr]",
+	"value-key": "[corr]",
         "command-line-flag": "--corr",
         "optional": true
     }, {
@@ -166,7 +168,7 @@
 	"type": "Flag",
         "default-value": true,
 	"description": "Calculates the coherence matrix bewteen all pairs of channels for each frequency.",
-	"command-line-key": "[cohe]",
+	"value-key": "[cohe]",
         "command-line-flag": "--cohe",
         "optional": true
     },  {
@@ -175,7 +177,7 @@
 	"type": "Flag",
         "default-value": true,
 	"description": "Calculates the phase difference matrix bewteen all pairs of channels for each frequency.",
-	"command-line-key": "[phdiff]",
+	"value-key": "[phdiff]",
         "command-line-flag": "--phdiff",
         "optional": true
     },  {
@@ -184,7 +186,7 @@
 	"type": "Flag",
         "default-value": true,
 	"description": "Calculates  the frequency domain correlations bewteen all pairs of channels for each frequency and each epoch.",
-	"command-line-key": "[fcorr]",
+	"value-key": "[fcorr]",
         "command-line-flag": "--fcorr",
         "optional": true
         
@@ -194,7 +196,7 @@
 	"type": "Flag",
         "default-value": true,
 	"description": "Stores the XYZ components of the solutions at the sources.",
-	"command-line-key": "[storexyz]",
+	"value-key": "[storexyz]",
         "command-line-flag": "--storexyz",
         "optional": true
     }
