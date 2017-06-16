@@ -74,9 +74,9 @@
     }, {
 	"id": "wbands",
 	"name": "wbands",
-        "default-value": "1.56 3.51; 3.9 7.41; 7.8 12.48; 12.87 19.11; 1.56 30",
+        "default-value": "1.56 3.51; 3.9 7.41; 7.8 12.48; 12.87 19.11; 1.56 19.11",
 	"type": "String",
-	"description": "Broad Bands definition. A string representing a 5x2 matrix of real numbers, where rows are separated by ';' and columns by spaces. Example: \"1.56 3.51; 3.9 7.41; 7.8 12.48; 12.87 19.11; 1.56 30\".",
+	"description": "Broad Bands definition. A string representing a 5x2 matrix of real numbers, where rows are separated by ';' and columns by spaces. Example: \"1.56 3.51; 3.9 7.41; 7.8 12.48; 12.87 19.11; 1.56 19.11\".",
 	"value-key": "[wbands]",
 	"list": false,
 	"optional": false
